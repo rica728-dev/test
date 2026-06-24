@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>colin study</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+  <header>
+    <h1>colin study</h1>
+    <nav>
+      <button onclick="showPage('study')">학습모드</button>
+      <button onclick="showPage('quiz')">퀴즈</button>
+      <button onclick="showPage('list')">단어 목록</button>
+      <button onclick="openAdmin()">관리</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="study" class="page active">
+      <h2>학습모드</h2>
+      <select id="studyLesson"></select>
+      <button onclick="startStudy()">학습 시작</button>
+      <button onclick="stopStudy()">정지</button>
+
+      <div class="card">
+        <h3 id="studyWord">단어</h3>
+        <p id="studyMeaning">뜻</p>
+      </div>
+    </section>
+
+    <section id="quiz" class="page">
+      <h2>퀴즈</h2>
+      <select id="quizLesson"></select>
+      <select id="quizMode">
+        <option value="soundToWord">소리 듣고 단어 찾기</option>
+        <option value="meaningToWord">뜻 보고 단어 찾기</option>
+        <option value="wordToMeaning">영단어 보고 뜻 찾기</option>
+      </select>
+      <button onclick="startQuiz()">문제 시작</button>
+
+      <div class="card">
+        <h3 id="quizQuestion">문제</h3>
+        <div id="quizOptions"></div>
+        <p id="quizResult"></p>
+      </div>
+    </section>
+
+    <section id="list" class="page">
+      <h2>단어 목록</h2>
+      <div id="wordList"></div>
+    </section>
+
+    <section id="add" class="page">
+      <h2>관리 - 단어 추가</h2>
+      <input id="lessonName" placeholder="차시 이름 예: 1일차" />
+      <textarea id="wordInput" placeholder="apple, 사과&#10;important, 중요한"></textarea>
+      <button onclick="addWords()">저장하기</button>
+    </section>
+  </main>
+
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
+import {
+  getFirestore
+}
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDz-NgQ5iUMVN9Czhzuxk2S7PLF936q0f8",
+    authDomain: "colinstudy-8d428.firebaseapp.com",
+    projectId: "colinstudy-8d428",
+    storageBucket: "colinstudy-8d428.firebasestorage.app",
+    messagingSenderId: "851261752667",
+    appId: "1:851261752667:web:2a9f7420e4873cd480c67e",
+    measurementId: "G-WMW6QS9MGY"
+  };
+
+  // Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+window.db = db;
+</script>
+</body>
+</html>
